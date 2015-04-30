@@ -117,3 +117,31 @@ fi
 export PATH="/home/chris/anaconda3/bin:$PATH"
 
 eval `dircolors ~/.solarized/dircolors-solarized/dircolors.256dark`
+
+# colors and functions to set PS1
+source ~/.colors
+
+function timer_start {
+    timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+    timer_show=$(($SECONDS - $timer))
+    unset timer
+}
+
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+NL='
+'
+HOST=$(hostname)
+errst=$?
+PS1=$NL
+PS1=$PS1"\$(if [[ \$? == 0 ]]; then echo \"${Green}\342\234\223 \"; else echo \"${Red}\$? \"; fi)"
+PS1=$PS1"${Yellow}"
+PS1=$PS1'(${timer_show} s)'
+PS1=$PS1" \T "
+PS1=$PS1"${Green}\u${White}@${Cyan}$HOST${Color_off}${White}:${IRed}\w"
+PS1="$PS1 \$($( cat .git-ps1.sh ))"
+PS1="$PS1 ${IPurple}\$([[ \j -gt 0 ]] && echo [\j])"
+PS1=$PS1"${NL}\[${Color_Off}\]$ "
