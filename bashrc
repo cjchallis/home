@@ -145,3 +145,15 @@ PS1=$PS1"${Green}\u${White}@${Cyan}$HOST${Color_off}${White}:${IRed}\w"
 PS1="$PS1 \$($( cat .git-ps1.sh ))"
 PS1="$PS1 ${IPurple}\$([[ \j -gt 0 ]] && echo [\j])"
 PS1=$PS1"${NL}\[${Color_Off}\]$ "
+
+if [ -f /etc/init.d/mountsshfs.sh ] && [ ! -d /media/sasrd01/admin ];  then
+    . /etc/init.d/mountsshfs.sh
+fi
+
+if [ -f /etc/init.d/mountsshfs.sh ] && [ ! -d /media/drm/data1 ];  then
+    . /etc/init.d/mountsshfs.sh
+fi
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
