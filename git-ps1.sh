@@ -40,7 +40,7 @@ if [ "$?" != '0' ]; then
 fi
 
 # colors can be overridden via the GITPS1_COLOR_* environment variables
-color_default=$( mkcolor ${GITPS1_COLOR_DEFAULT:-33} )
+color_default=$( mkcolor ${GITPS1_COLOR_DEFAULT:-34} )
 color_fastfwd=$( mkcolor ${GITPS1_COLOR_FASTFWD:-31} )
 color_staged=$( mkcolor ${GITPS1_COLOR_STAGED:-32} )
 color_untracked=$( mkcolor ${GITPS1_COLOR_UNTRACKED:-31} )
