@@ -15,11 +15,11 @@ map <F6> :set nowfw<CR>:let name = expand('%<')<CR>:vert sbuffer <C-R>=name<CR>.
 map <F7> :set nowfw<CR>:let name = expand('%<')<CR>:vert sbuffer <C-R>=name<CR>.lst<CR> :set wfw<CR>:vertical resize 110<CR>:call NormalizeWidths()<CR>
 
 " run only current selection
-map <F9> :'<,'>w! temp.sas<CR>:only<CR>:!sas temp.sas -log '%<.log' -print '%<.lst' -autoexec ~/autoexec.sas<CR>:vs %<.log<CR>:vs %<.lst<CR>
+map <F9> :'<,'>w! temp.sas<CR>:only<CR>:!sas temp.sas -log '%<.log' -print '%<.lst' -autoexec ~/sas/autoexec.sas<CR>:vs %<.log<CR>:vs %<.lst<CR>
 
 " change the autoexec to the selected code
 " useful for setting libraries and macro variables
-map <F1> :'<,'>w! ~/autoexec.sas<CR>
+map <F1> :'<,'>w! ~/sas/autoexec.sas<CR>
 
 " the following map Shift-F5, -F6, and -F7, respectively, to view only the
 " corresponding file
@@ -41,10 +41,10 @@ vnoremap q c<CR><CR>*/<Up>/*<CR><ESC>p
 vnoremap <Leader>p y :call ProcPrint("<C-R>0")<CR>
 
 fun! ProcPrint(dataset)
-    silent !echo "proc print data=" > ~/print.sas
-    execute "silent !echo ".a:dataset." >> ~/print.sas" 
-    silent ! echo "; run;" >> ~/print.sas
-    silent ! sas ~/print.sas -autoexec ~/autoexec.sas
+    silent !echo "proc print data=" > ~/sas/print.sas
+    execute "silent !echo ".a:dataset." >> ~/sas/print.sas" 
+    silent ! echo "; run;" >> ~/sas/print.sas
+    silent ! sas ~/sas/print.sas -autoexec ~/sas/autoexec.sas
     vs print.lst
     redraw!
 endf
