@@ -15,7 +15,7 @@ map <F6> :set nowfw<CR>:let name = expand('%<')<CR>:vert sbuffer <C-R>=name<CR>.
 map <F7> :set nowfw<CR>:let name = expand('%<')<CR>:vert sbuffer <C-R>=name<CR>.lst<CR> :set wfw<CR>:vertical resize 110<CR>:call NormalizeWidths()<CR>
 
 " run only current selection
-map <F9> :'<,'>w! temp.sas<CR>:only<CR>:!sas temp.sas -log '%<.log' -print '%<.lst' -autoexec ~/sas/autoexec.sas<CR>:vs %<.log<CR>:vs %<.lst<CR>
+map <F9> :'<,'>w! ~/sas/temp.sas<CR>:only<CR>:!sas ~/sas/temp.sas -log '%<.log' -print '%<.lst' -autoexec ~/sas/autoexec.sas<CR>:vs %<.log<CR>:vs %<.lst<CR>
 
 " change the autoexec to the selected code
 " useful for setting libraries and macro variables
