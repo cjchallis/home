@@ -160,4 +160,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [[ -f ~/mountsshfs.sh ]] && [[ ! -d ~/pdlsas01/hb26404/models ]]; then
+    ~/mountsshfs.sh
+fi
+
 alias cdsas='cd /opt/apps/sas/MKT_data/hb26404'
