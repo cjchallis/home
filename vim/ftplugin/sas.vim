@@ -7,7 +7,7 @@ map <F3> :w<CR>:only<CR>:!sas %<CR>:vs %<.log<CR>:vs %<.lst<CR>
 map <F4> :e %<.sas<CR>:only<CR>:vs %<.log<CR>:vs %<.lst<CR>
 
 " close all but the current window
-map <F8> :vertical resize 170<CR>
+map <F8> :vertical resize 190<CR>
 
 " open a new window or switch to existing open window
 map <F5> :set nowfw<CR>:let name = expand('%<')<CR>:vert sbuffer <C-R>=name<CR>.sas<CR> :set wfw<CR>:vertical resize 110<CR>:call NormalizeWidths()<CR>
@@ -37,15 +37,27 @@ nnoremap <C-K> <C-W><Down>
 " comment out selected code
 vnoremap q c<CR><CR>*/<Up>/*<CR><ESC>p
 
-" command  and function for look at contents of datasets
+" command and function for quick proc print of highlighted dataset
 vnoremap <Leader>p y :call ProcPrint("<C-R>0")<CR>
 
 fun! ProcPrint(dataset)
     silent !echo "proc print data=" > ~/sas/print.sas
     execute "silent !echo ".a:dataset." >> ~/sas/print.sas" 
     silent ! echo "; run;" >> ~/sas/print.sas
-    silent ! sas ~/sas/print.sas -autoexec ~/sas/autoexec.sas
-    vs print.lst
+    silent ! sas ~/sas/print.sas -autoexec ~/sas/autoexec.sas -log ~/sas/print.log -print ~/sas/print.lst
+    vs ~/sas/print.lst
+    redraw!
+endf
+ 
+" command and function for quick proc contents of highlighted dataset
+vnoremap <Leader>c y :call ProcContents("<C-R>0")<CR>
+
+fun! ProcContents(dataset)
+    silent !echo "proc contents data=" > ~/sas/contents.sas
+    execute "silent !echo ".a:dataset." >> ~/sas/contents.sas" 
+    silent ! echo "; run;" >> ~/sas/contents.sas
+    silent ! sas ~/sas/contents.sas -autoexec ~/sas/autoexec.sas -log ~/sas/contents.log -print ~/sas/contents.lst
+    vs ~/sas/contents.lst
     redraw!
 endf
 
@@ -104,4 +116,4 @@ augroup END
 noremap <Leader><Tab> :call VexToggle(getcwd())<CR>
 
 " specific commands for common files
-nnoremap <Leader>m :vs /opt/apps/sas/MKT_data/shared_data/datascience/macrolib/modeling_macro_library_v03.sas<CR>
+nnoremap <Leader>m :vs /opt/apps/sas/MKT_data/hb26404/macrolib/modeling_macro_library_v03.sas<CR>
