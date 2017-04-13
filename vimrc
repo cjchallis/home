@@ -36,3 +36,4 @@ endif
 hi LineNr ctermbg=white
 
 let mapleader=","
+
