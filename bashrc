@@ -165,3 +165,10 @@ if [[ -f ~/mountsshfs.sh ]] && [[ ! -d ~/pdlsas01/hb26404/models ]]; then
 fi
 
 alias cdsas='cd /opt/apps/sas/MKT_data/hb26404'
+
+# Spark and Hadoop configuration
+
+export LD_LIBRARY_PATH=/home/challis/Programs/hadoop-2.7.3/lib/native/:$LD_LIBRARY_PATH
+export LIBPROCESS_IP=`ifconfig | grep inet | grep Bcast | awk '{print $2}' | cut -c6-`
+export SPARK_LOCAL_IP=$LIBPROCESS_IP
+
